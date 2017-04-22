@@ -11,10 +11,14 @@ items = page.css('item')
 guids = items.css('guid').text.split(".mp4")
 guids.map{|g| g << ".mp4"}
 
-guids.each_with_index{ |g,i| system("wget -O #{i} #{g}") }
+File.open("urls.txt", "w+") do |f|
+  f.puts(guids)
+end
+
+#guids.each_with_index{ |g,i| system("wget -O #{i} #{g}") }
 
 # titles, guids.each {|t,g| wget -O t g }
-
+system("aria2c -i #{urls.txt}")
 
 #puts guids[0]
 #system("wget #{guids[0]} ")
