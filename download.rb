@@ -5,23 +5,31 @@ require 'nokogiri'
 arg = ARGV[0]
 page = Nokogiri::HTML(open(arg))
 dir = page.css('title')[0].text.gsub(/\s+/, "")
-system("mkdir #{dir} && cd #{dir}")
+system("mkdir #{dir}")
 
-items = page.css('item')
-#titles = items.css('title').text.to_a
-#print titles
-#TODO: Split string on .mp4 without removing mp4
-guids = items.css('guid').text.split(".mp4")
-guids.map{|g| g << ".mp4"}
-
-File.open("urls.txt", "w+") do |f|
-  f.puts(guids)
+$count = 0  
+def counter()
+  return $count+=1
 end
 
-#guids.each_with_index{ |g,i| system("wget -O #{i} #{g}") }
+titles = []
+page.css('item').css('title').each do |t| 
+  titles.push("#{dir}/#{counter()}.#{t.text.gsub(/\s+/, "")}")
+end
 
-# titles, guids.each {|t,g| wget -O t g }
-#system("aria2c -i #{urls.txt}")
+page.css('item').css('guid').each_with_index do |g,i|
+  puts "Downloading #{titles[i]}"
+  system("wget -q -b -O #{titles[i]} #{g.text}")
+end
+
+# alternative method using aria2
+#File.open("urls.txt", "w+") do |f|
+#  f.puts(guids)
+#end
+
+#system("aria2c -c -x 10 -d #{dir} -i urls.txt")
 
 #puts guids[0]
 #system("wget #{guids[0]} ")
+
+
