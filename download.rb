@@ -4,4 +4,8 @@ require 'nokogiri'
 
 arg = ARGV[0]
 page = Nokogiri::HTML(open(arg))
-puts page
+items = page.css('item')
+titles = items.css('title').text.split("\n")
+guids = items.css('guid').text.split("\n")
+print titles
+print titles.class
