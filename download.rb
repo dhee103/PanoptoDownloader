@@ -5,7 +5,16 @@ require 'nokogiri'
 arg = ARGV[0]
 page = Nokogiri::HTML(open(arg))
 items = page.css('item')
-titles = items.css('title').text.split("\n")
-guids = items.css('guid').text.split("\n")
-print titles
-print titles.class
+#titles = items.css('title').text.to_a
+#print titles
+#TODO: Split string on .mp4 without removing mp4
+guids = items.css('guid').text.split(".mp4")
+guids.map{|g| g << ".mp4"}
+
+guids.each{|g| system("wget #{g}")}
+
+# titles, guids.each {|t,g| wget -O t g }
+
+
+#puts guids[0]
+#system("wget #{guids[0]} ")
