@@ -11,7 +11,7 @@ items = page.css('item')
 guids = items.css('guid').text.split(".mp4")
 guids.map{|g| g << ".mp4"}
 
-guids.each{|g| system("wget #{g}")}
+guids.each_with_index{ |g,i| system("wget -O #{i} #{g}") }
 
 # titles, guids.each {|t,g| wget -O t g }
 
