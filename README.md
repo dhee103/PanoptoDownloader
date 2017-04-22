@@ -4,14 +4,16 @@ Simple panopto downloader written in Ruby
 Requirements:
 -ruby
 -nokogiri (gem)
--open-uri (gem) ???
+-open-uri (gem) 
 
 Instructions:
 -go to panopto folder
--click on the drop down arrow next to RSS symbol (orange box with white sidways wifi symbol)
--right click on "Subscribe to RSS" and click "Copy link address"
--goto folder where script is located
--run using: ruby download.rb "--paste link address--"
+-click on the drop down arrow next to the RSS symbol (orange box with the white sideways wifi symbol)
+-right click on "Subscribe to RSS" and click on "Copy link address"
+-go to folder where script is located
+-run using: ruby download.rb "URL" where URL is the copied link address
+
+Output: 
 -The files will be downloaded into an appropriately named folderand be numbered and named for viewing convenience
 
 Note: 
