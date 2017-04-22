@@ -1,11 +1,7 @@
+require 'rubygems'
 require 'open-uri'
+require 'nokogiri'
 
 arg = ARGV[0]
-uri = URI.parse(arg)
-
-links = []
-uri.open {|f|
-  f.each_line {|l| p l}
-}
-
-
+page = Nokogiri::HTML(open(arg))
+puts page
