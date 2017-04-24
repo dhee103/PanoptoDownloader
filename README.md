@@ -5,6 +5,7 @@ Requirements:
 - ruby
 - nokogiri (gem)
 - open-uri (gem) 
+- wget
 
 Instructions:
 - Go to panopto folder
